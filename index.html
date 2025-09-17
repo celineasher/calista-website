@@ -3,148 +3,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Calista 💖</title>
+  <title>Calista 💜</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
     body {
-      background: #0a0a0a;
-      color: #fff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #4b0082, #8a2be2, #9932cc);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
       overflow-x: hidden;
     }
-    /* Neon Glow */
-    .neon {
-      text-shadow: 0 0 10px #ff4ecb, 0 0 20px #ff4ecb, 0 0 40px #ff1dc1;
-    }
+    .neon { text-shadow: 0 0 10px #ff66ff, 0 0 20px #ff33ff, 0 0 40px #cc00cc; }
     .neon-box {
-      box-shadow: 0 0 10px #ff4ecb, 0 0 20px #ff4ecb;
-      border: 2px solid #ff4ecb;
+      box-shadow: 0 0 15px #ff33ff, 0 0 30px #ff33ff;
+      border: 2px solid #ff66ff;
     }
-    /* Floating hearts */
-    .hearts {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: -1;
-    }
+    /* Floating Hearts */
     .heart {
-      position: absolute;
-      color: #ff4ecb;
-      font-size: 1.5rem;
-      animation: float 10s linear infinite;
-      opacity: 0.7;
+      position: fixed; color: #ff66ff; font-size: 1.5rem;
+      animation: float 10s linear infinite; opacity: 0.8;
+      pointer-events: none;
     }
-    @keyframes float {
-      from { transform: translateY(100vh) scale(1); }
-      to { transform: translateY(-10vh) scale(1.5); }
+    @keyframes float { from{transform:translateY(100vh)} to{transform:translateY(-10vh)} }
+    /* Countdown */
+    #countdown { font-size: 1.8rem; font-weight: bold; }
+    /* Timeline */
+    .timeline { border-left: 4px solid #ff66ff; padding-left: 20px; }
+    .timeline-item { margin: 20px 0; position: relative; }
+    .timeline-item::before {
+      content: "💜"; position: absolute; left: -35px; top: 0;
     }
-    /* Typewriter */
-    .typewriter {
-      overflow: hidden;
-      border-right: .15em solid #ff4ecb;
-      white-space: nowrap;
-      margin: 0 auto;
-      letter-spacing: .1em;
-      animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+    /* Heart Trail */
+    .trail { position: absolute; pointer-events: none; animation: fadeOut 1s forwards; }
+    @keyframes fadeOut { from{opacity:1;transform:scale(1)} to{opacity:0;transform:scale(2)} }
+    /* Modal */
+    #loveModal {
+      display:none; position:fixed; top:0; left:0; width:100%; height:100%;
+      background:rgba(0,0,0,0.8); justify-content:center; align-items:center; z-index:100;
     }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    #loveModalContent {
+      background:#1a1a1a; padding:2rem; border-radius:1rem; text-align:center;
+      animation: popIn .6s ease; max-width:500px;
     }
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #ff4ecb }
-    }
-    /* Love popup */
-    #popup {
-      display: none;
-      position: fixed;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      background: #1a1a1a;
-      padding: 2rem;
-      border-radius: 1rem;
-      text-align: center;
-      z-index: 50;
-    }
-    #popup.show {
-      display: block;
-      animation: glowPopup 0.5s ease;
-    }
-    @keyframes glowPopup {
-      from { opacity: 0; transform: translate(-50%, -60%); }
-      to { opacity: 1; transform: translate(-50%, -50%); }
-    }
+    @keyframes popIn { from{transform:scale(0.5);opacity:0} to{transform:scale(1);opacity:1} }
+    /* Polaroid Gallery */
+    .polaroid { background:white; padding:10px; border:5px solid #ff66ff;
+      box-shadow:0 0 20px #ff33ff; transform:rotate(-2deg);
+      transition: transform .3s ease; }
+    .polaroid:hover { transform:rotate(2deg) scale(1.05); }
+    /* Music Visualizer */
+    #bars { display:flex; justify-content:center; align-items:flex-end; height:60px; gap:5px; }
+    .bar { width:8px; background:#ff66ff; animation: bounce 1s infinite ease-in-out; }
+    @keyframes bounce { 0%,100%{height:10px} 50%{height:60px} }
   </style>
 </head>
 <body>
-
-  <!-- Floating Hearts Background -->
-  <div class="hearts">
-    <span class="heart" style="left:10%; animation-duration:12s;">💖</span>
-    <span class="heart" style="left:30%; animation-duration:15s;">💕</span>
-    <span class="heart" style="left:50%; animation-duration:10s;">💓</span>
-    <span class="heart" style="left:70%; animation-duration:18s;">💘</span>
-    <span class="heart" style="left:90%; animation-duration:20s;">💗</span>
-  </div>
+  <!-- Floating Hearts -->
+  <span class="heart" style="left:10%; animation-duration:12s;">💖</span>
+  <span class="heart" style="left:30%; animation-duration:15s;">💕</span>
+  <span class="heart" style="left:60%; animation-duration:20s;">💘</span>
+  <span class="heart" style="left:80%; animation-duration:25s;">💜</span>
 
   <!-- Header -->
   <header class="text-center py-12">
-    <h1 class="text-5xl font-extrabold neon animate-pulse">💖 Calista (Baby) 💖</h1>
-    <p class="mt-4 typewriter">Hi Baby… I made this just for you ✨</p>
+    <h1 class="text-5xl font-extrabold neon animate-pulse">💜 Calista (Baby) 💜</h1>
+    <p class="mt-4 text-lg">Hi Baby, this website is all for you ✨</p>
   </header>
 
-  <!-- About Her -->
+  <!-- About -->
   <section class="max-w-4xl mx-auto text-center py-12 px-4" data-aos="fade-up">
-    <img src="her-photo.jpg" alt="Calista" class="w-40 h-40 rounded-full mx-auto object-cover neon-box hover:scale-110 transition">
+    <img src="her-photo.jpg" alt="Calista"
+      class="w-40 h-40 rounded-full mx-auto object-cover neon-box hover:scale-110 transition">
     <h2 class="text-3xl font-semibold mt-6 neon">About Baby 🌸</h2>
-    <p class="mt-4 text-lg leading-relaxed">
-      Calista was born on <span class="font-bold">December 9, 2009</span>.  
-      She’s from <span class="font-bold">Jakarta Barat</span>, she loves Wingstop chicken wings 🍗,  
-      and she makes my world brighter every single day.  
+    <p class="mt-4 text-lg">
+      Calista was born on <b>December 9, 2009</b>.  
+      She’s from <b>Jakarta Barat</b>, loves Wingstop chicken wings 🍗,  
+      and makes my world brighter every day. 💕
     </p>
   </section>
 
-  <!-- Birthday Countdown -->
-  <section class="text-center py-12 bg-black bg-opacity-50 neon-box mx-6 rounded-xl" data-aos="zoom-in">
+  <!-- Countdown -->
+  <section class="text-center py-12 neon-box mx-6 rounded-xl bg-black bg-opacity-50" data-aos="zoom-in">
     <h2 class="text-2xl font-bold neon">🎂 Birthday Countdown 🎂</h2>
-    <p id="countdown" class="mt-4 text-xl"></p>
+    <p id="countdown" class="mt-4"></p>
   </section>
 
-  <!-- Favorite Things -->
-  <section class="max-w-5xl mx-auto py-12 px-6 grid md:grid-cols-3 gap-8">
-    <div class="bg-black bg-opacity-50 neon-box rounded-2xl p-6 text-center hover:scale-105 transition" data-aos="fade-right">
-      <img src="jakarta-barat.jpg" alt="Jakarta Barat" class="rounded-xl h-40 w-full object-cover">
-      <h3 class="text-xl font-bold mt-4 neon">🌆 Jakarta Barat</h3>
-      <p class="mt-2">Her beautiful hometown, full of memories and stories.</p>
-    </div>
-    <div class="bg-black bg-opacity-50 neon-box rounded-2xl p-6 text-center hover:scale-105 transition" data-aos="zoom-in">
-      <img src="wingstop.jpg" alt="Wingstop" class="rounded-xl h-40 w-full object-cover">
-      <h3 class="text-xl font-bold mt-4 neon">🍗 Wingstop</h3>
-      <p class="mt-2">Her favorite food – crispy, saucy, and delicious wings!</p>
-    </div>
-    <div class="bg-black bg-opacity-50 neon-box rounded-2xl p-6 text-center hover:scale-105 transition" data-aos="fade-left">
-      <img src="her-photo2.jpg" alt="Calista" class="rounded-xl h-40 w-full object-cover">
-      <h3 class="text-xl font-bold mt-4 neon">💖 Baby</h3>
-      <p class="mt-2">The most amazing girlfriend ever – kind, sweet, and beautiful.</p>
-    </div>
-  </section>
-
-  <!-- Love Button -->
+  <!-- Music -->
   <section class="text-center py-12">
-    <button onclick="showLove()" class="px-6 py-3 neon-box rounded-full neon hover:scale-110 transition">
-      💌 Click Me Baby 💌
+    <button onclick="toggleMusic()"
+      class="px-6 py-3 neon-box rounded-full neon hover:scale-110 transition">
+      🎶 Play/Stop Our Song 🎶
     </button>
+    <div id="bars" class="mt-4">
+      <div class="bar" style="animation-delay:0s"></div>
+      <div class="bar" style="animation-delay:.2s"></div>
+      <div class="bar" style="animation-delay:.4s"></div>
+      <div class="bar" style="animation-delay:.6s"></div>
+      <div class="bar" style="animation-delay:.8s"></div>
+    </div>
+    <audio id="bg-music" loop>
+      <source src="our-song.mp3" type="audio/mpeg">
+    </audio>
   </section>
 
-  <!-- Popup -->
-  <div id="popup" class="neon-box">
-    <h2 class="text-2xl neon">I Love You So Much 💖</h2>
-    <p class="mt-4">You’re the most special person in my life, Baby 🌸</p>
-    <button onclick="hideLove()" class="mt-6 px-4 py-2 bg-pink-600 rounded-lg">Close</button>
+  <!-- Gallery -->
+  <section class="max-w-5xl mx-auto py-12 px-6 grid md:grid-cols-3 gap-8">
+    <div class="polaroid" data-aos="fade-right">
+      <img src="jakarta-barat.jpg" alt="Jakarta Barat" class="rounded-xl h-40 w-full object-cover">
+      <h3 class="text-xl font-bold mt-4 neon text-center">🌆 Jakarta Barat</h3>
+    </div>
+    <div class="polaroid" data-aos="zoom-in">
+      <img src="wingstop.jpg" alt="Wingstop" class="rounded-xl h-40 w-full object-cover">
+      <h3 class="text-xl font-bold mt-4 neon text-center">🍗 Wingstop</h3>
+    </div>
+    <div class="polaroid" data-aos="fade-left">
+      <img src="her-photo2.jpg" alt="Calista" class="rounded-xl h-40 w-full object-cover">
+      <h3 class="text-xl font-bold mt-4 neon text-center">💖 Baby</h3>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="max-w-3xl mx-auto py-12 px-6">
+    <h2 class="text-3xl font-bold text-center neon">📝 Our Love Story</h2>
+    <div class="timeline mt-8">
+      <div class="timeline-item"><h3 class="font-bold">💜 The Day We Met</h3><p>Everything changed when I found you.</p></div>
+      <div class="timeline-item"><h3 class="font-bold">🍗 First Wingstop Date</h3><p>We laughed, ate wings, and made memories.</p></div>
+      <div class="timeline-item"><h3 class="font-bold">🌸 Now & Forever</h3><p>You’re my Baby, today and always 💖</p></div>
+    </div>
+  </section>
+
+  <!-- Fun Buttons -->
+  <section class="text-center py-12 flex flex-wrap justify-center gap-4">
+    <button onclick="showLoveLetter()" class="px-6 py-3 neon-box rounded-full neon">💌 Open Love Letter</button>
+    <button onclick="heartRain()" class="px-6 py-3 neon-box rounded-full neon">💖 Heart Rain</button>
+    <button onclick="showFortune()" class="px-6 py-3 neon-box rounded-full neon">🔮 Love Fortune</button>
+  </section>
+
+  <!-- Love Modal -->
+  <div id="loveModal" class="flex">
+    <div id="loveModalContent" class="neon-box">
+      <h2 class="text-2xl neon">To My Baby 💜</h2>
+      <p class="mt-4">You’re the most special person in my life.  
+      Every moment with you feels magical.  
+      I love you endlessly 🌸💖</p>
+      <button onclick="closeLoveLetter()" class="mt-6 px-4 py-2 bg-pink-600 rounded-lg">Close</button>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -152,28 +155,96 @@
     <p class="text-lg neon animate-pulse">Made with ❤️ for my Baby, Calista</p>
   </footer>
 
-  <!-- AOS -->
+  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init({ duration: 1000, once: true });
 
-    // Birthday Countdown
+    // Countdown + Confetti
     function updateCountdown() {
-      const birthday = new Date(new Date().getFullYear(), 11, 9); // Dec 9
+      const birthday = new Date(new Date().getFullYear(), 11, 9, 0, 0, 0);
       const now = new Date();
-      if (now > birthday) {
-        birthday.setFullYear(birthday.getFullYear() + 1);
-      }
+      if (now > birthday) birthday.setFullYear(birthday.getFullYear() + 1);
       const diff = birthday - now;
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      document.getElementById("countdown").innerText = days + " days until Baby’s birthday! 🎉";
+      const d = Math.floor(diff / (1000*60*60*24));
+      const h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+      const m = Math.floor((diff%(1000*60*60))/(1000*60));
+      const s = Math.floor((diff%(1000*60))/1000);
+      document.getElementById("countdown").innerText =
+        `${d}d ${h}h ${m}m ${s}s left!`;
+      if (diff <= 0) launchConfetti();
     }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+    setInterval(updateCountdown, 1000); updateCountdown();
 
-    // Love Popup
-    function showLove() { document.getElementById("popup").classList.add("show"); }
-    function hideLove() { document.getElementById("popup").classList.remove("show"); }
+    function launchConfetti() {
+      for (let i=0;i<200;i++){
+        const conf=document.createElement("div");
+        conf.innerText="🎉";
+        conf.style.position="fixed";
+        conf.style.left=Math.random()*100+"vw";
+        conf.style.top=Math.random()*100+"vh";
+        conf.style.fontSize=Math.random()*24+14+"px";
+        conf.style.animation=`float ${Math.random()*5+5}s linear infinite`;
+        document.body.appendChild(conf);
+        setTimeout(()=>conf.remove(),5000);
+      }
+    }
+
+    // Music + Visualizer
+    const music=document.getElementById("bg-music");
+    function toggleMusic(){ music.paused?music.play():music.pause(); }
+    music.addEventListener("play",()=>document.getElementById("bars").style.opacity=1);
+    music.addEventListener("pause",()=>document.getElementById("bars").style.opacity=0);
+
+    // Love Letter Modal
+    function showLoveLetter(){document.getElementById("loveModal").style.display="flex";}
+    function closeLoveLetter(){document.getElementById("loveModal").style.display="none";}
+
+    // Heart Rain
+    function heartRain(){
+      for(let i=0;i<50;i++){
+        const h=document.createElement("div");
+        h.innerText="💖";
+        h.style.position="fixed";
+        h.style.left=Math.random()*100+"vw";
+        h.style.top="-10px";
+        h.style.fontSize="24px";
+        h.style.animation=`fall ${Math.random()*3+2}s linear`;
+        document.body.appendChild(h);
+        setTimeout(()=>h.remove(),4000);
+      }
+    }
+    const style=document.createElement("style");
+    style.innerHTML=`@keyframes fall{to{transform:translateY(100vh);opacity:0}}`;
+    document.head.appendChild(style);
+
+    // Fortune Cookie
+    const fortunes=[
+      "Our love is infinite 💜",
+      "You are my soulmate 🌸",
+      "We are forever 💕",
+      "You + Me = Always 💖",
+      "Every day with you is magic ✨"
+    ];
+    function showFortune(){ alert(fortunes[Math.floor(Math.random()*fortunes.length)]); }
+
+    // Emoji Pet Follower
+    const pet=document.createElement("div");
+    pet.innerText="🐇";
+    pet.style.position="fixed"; pet.style.left="50px"; pet.style.top="50px"; pet.style.fontSize="2rem";
+    document.body.appendChild(pet);
+    document.addEventListener("mousemove", e=>{
+      pet.style.left=e.pageX+20+"px"; pet.style.top=e.pageY+20+"px";
+    });
+
+    // Heart trail
+    document.addEventListener("mousemove", e=>{
+      const h=document.createElement("div");
+      h.className="trail"; h.innerText="💜";
+      h.style.left=e.pageX+"px"; h.style.top=e.pageY+"px";
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),1000);
+    });
   </script>
 </body>
 </html>
