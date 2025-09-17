@@ -5,41 +5,102 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Calista 💖</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- AOS (Animate on Scroll) -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <style>
-    /* Floating hearts animation */
-    body::before {
-      content: "💕 💖 💕 💗 💕";
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow-x: hidden;
+    }
+    /* Neon Glow */
+    .neon {
+      text-shadow: 0 0 10px #ff4ecb, 0 0 20px #ff4ecb, 0 0 40px #ff1dc1;
+    }
+    .neon-box {
+      box-shadow: 0 0 10px #ff4ecb, 0 0 20px #ff4ecb;
+      border: 2px solid #ff4ecb;
+    }
+    /* Floating hearts */
+    .hearts {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      font-size: 2rem;
-      animation: float 12s linear infinite;
-      opacity: 0.1;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
       pointer-events: none;
-      white-space: nowrap;
+      overflow: hidden;
+      z-index: -1;
+    }
+    .heart {
+      position: absolute;
+      color: #ff4ecb;
+      font-size: 1.5rem;
+      animation: float 10s linear infinite;
+      opacity: 0.7;
     }
     @keyframes float {
-      from { transform: translateY(100%); }
-      to { transform: translateY(-100%); }
+      from { transform: translateY(100vh) scale(1); }
+      to { transform: translateY(-10vh) scale(1.5); }
+    }
+    /* Typewriter */
+    .typewriter {
+      overflow: hidden;
+      border-right: .15em solid #ff4ecb;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: .1em;
+      animation: typing 4s steps(40, end), blink-caret .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #ff4ecb }
+    }
+    /* Love popup */
+    #popup {
+      display: none;
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 1rem;
+      text-align: center;
+      z-index: 50;
+    }
+    #popup.show {
+      display: block;
+      animation: glowPopup 0.5s ease;
+    }
+    @keyframes glowPopup {
+      from { opacity: 0; transform: translate(-50%, -60%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-pink-100 to-pink-200 min-h-screen text-gray-800 relative">
+<body>
+
+  <!-- Floating Hearts Background -->
+  <div class="hearts">
+    <span class="heart" style="left:10%; animation-duration:12s;">💖</span>
+    <span class="heart" style="left:30%; animation-duration:15s;">💕</span>
+    <span class="heart" style="left:50%; animation-duration:10s;">💓</span>
+    <span class="heart" style="left:70%; animation-duration:18s;">💘</span>
+    <span class="heart" style="left:90%; animation-duration:20s;">💗</span>
+  </div>
 
   <!-- Header -->
-  <header class="text-center py-12 bg-gradient-to-r from-pink-500 to-rose-400 text-white shadow-lg" data-aos="zoom-in">
-    <h1 class="text-5xl font-extrabold animate-bounce">💖 Calista (Baby) 💖</h1>
-    <p class="mt-3 text-lg">My amazing girlfriend, my love, my everything</p>
+  <header class="text-center py-12">
+    <h1 class="text-5xl font-extrabold neon animate-pulse">💖 Calista (Baby) 💖</h1>
+    <p class="mt-4 typewriter">Hi Baby… I made this just for you ✨</p>
   </header>
 
   <!-- About Her -->
   <section class="max-w-4xl mx-auto text-center py-12 px-4" data-aos="fade-up">
-    <img src="her-photo.jpg" alt="Calista" class="w-40 h-40 rounded-full mx-auto shadow-lg object-cover border-4 border-pink-300 hover:scale-110 transition">
-    <h2 class="text-3xl font-semibold mt-6">About Baby 🌸</h2>
+    <img src="her-photo.jpg" alt="Calista" class="w-40 h-40 rounded-full mx-auto object-cover neon-box hover:scale-110 transition">
+    <h2 class="text-3xl font-semibold mt-6 neon">About Baby 🌸</h2>
     <p class="mt-4 text-lg leading-relaxed">
       Calista was born on <span class="font-bold">December 9, 2009</span>.  
       She’s from <span class="font-bold">Jakarta Barat</span>, she loves Wingstop chicken wings 🍗,  
@@ -47,60 +108,72 @@
     </p>
   </section>
 
+  <!-- Birthday Countdown -->
+  <section class="text-center py-12 bg-black bg-opacity-50 neon-box mx-6 rounded-xl" data-aos="zoom-in">
+    <h2 class="text-2xl font-bold neon">🎂 Birthday Countdown 🎂</h2>
+    <p id="countdown" class="mt-4 text-xl"></p>
+  </section>
+
   <!-- Favorite Things -->
   <section class="max-w-5xl mx-auto py-12 px-6 grid md:grid-cols-3 gap-8">
-    <div class="bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-2xl hover:scale-105 transition" data-aos="fade-right">
+    <div class="bg-black bg-opacity-50 neon-box rounded-2xl p-6 text-center hover:scale-105 transition" data-aos="fade-right">
       <img src="jakarta-barat.jpg" alt="Jakarta Barat" class="rounded-xl h-40 w-full object-cover">
-      <h3 class="text-xl font-bold mt-4">🌆 Jakarta Barat</h3>
+      <h3 class="text-xl font-bold mt-4 neon">🌆 Jakarta Barat</h3>
       <p class="mt-2">Her beautiful hometown, full of memories and stories.</p>
     </div>
-    <div class="bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-2xl hover:scale-105 transition" data-aos="zoom-in">
+    <div class="bg-black bg-opacity-50 neon-box rounded-2xl p-6 text-center hover:scale-105 transition" data-aos="zoom-in">
       <img src="wingstop.jpg" alt="Wingstop" class="rounded-xl h-40 w-full object-cover">
-      <h3 class="text-xl font-bold mt-4">🍗 Wingstop</h3>
+      <h3 class="text-xl font-bold mt-4 neon">🍗 Wingstop</h3>
       <p class="mt-2">Her favorite food – crispy, saucy, and delicious wings!</p>
     </div>
-    <div class="bg-white rounded-2xl shadow-md p-6 text-center hover:shadow-2xl hover:scale-105 transition" data-aos="fade-left">
+    <div class="bg-black bg-opacity-50 neon-box rounded-2xl p-6 text-center hover:scale-105 transition" data-aos="fade-left">
       <img src="her-photo2.jpg" alt="Calista" class="rounded-xl h-40 w-full object-cover">
-      <h3 class="text-xl font-bold mt-4">💖 Baby</h3>
+      <h3 class="text-xl font-bold mt-4 neon">💖 Baby</h3>
       <p class="mt-2">The most amazing girlfriend ever – kind, sweet, and beautiful.</p>
     </div>
   </section>
 
-  <!-- Timeline -->
-  <section class="bg-pink-50 py-12 px-6">
-    <h2 class="text-3xl font-semibold text-center mb-8" data-aos="zoom-in">✨ Our Journey ✨</h2>
-    <div class="max-w-3xl mx-auto space-y-6">
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up">
-        <h3 class="text-xl font-bold text-pink-500">The Day We Started Dating ❤️</h3>
-        <p class="mt-2">The beginning of our beautiful story together. I knew you were the one.</p>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="200">
-        <h3 class="text-xl font-bold text-pink-500">Wingstop Dates 🍗</h3>
-        <p class="mt-2">All those fun dates sharing chicken wings and laughter.</p>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="400">
-        <h3 class="text-xl font-bold text-pink-500">Special Memories ✨</h3>
-        <p class="mt-2">Every little moment with you is unforgettable, Baby.</p>
-      </div>
-      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition" data-aos="fade-up" data-aos-delay="600">
-        <h3 class="text-xl font-bold text-pink-500">Future Plans 🌎</h3>
-        <p class="mt-2">Travel, dreams, and all the amazing things we’ll do together.</p>
-      </div>
-    </div>
+  <!-- Love Button -->
+  <section class="text-center py-12">
+    <button onclick="showLove()" class="px-6 py-3 neon-box rounded-full neon hover:scale-110 transition">
+      💌 Click Me Baby 💌
+    </button>
   </section>
 
+  <!-- Popup -->
+  <div id="popup" class="neon-box">
+    <h2 class="text-2xl neon">I Love You So Much 💖</h2>
+    <p class="mt-4">You’re the most special person in my life, Baby 🌸</p>
+    <button onclick="hideLove()" class="mt-6 px-4 py-2 bg-pink-600 rounded-lg">Close</button>
+  </div>
+
   <!-- Footer -->
-  <footer class="text-center py-8 bg-gradient-to-r from-pink-500 to-rose-400 text-white mt-12" data-aos="fade-up">
-    <p class="text-lg animate-pulse">Made with ❤️ for my Baby, Calista</p>
+  <footer class="text-center py-8 mt-12">
+    <p class="text-lg neon animate-pulse">Made with ❤️ for my Baby, Calista</p>
   </footer>
 
-  <!-- AOS script -->
+  <!-- AOS -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
+    AOS.init({ duration: 1000, once: true });
+
+    // Birthday Countdown
+    function updateCountdown() {
+      const birthday = new Date(new Date().getFullYear(), 11, 9); // Dec 9
+      const now = new Date();
+      if (now > birthday) {
+        birthday.setFullYear(birthday.getFullYear() + 1);
+      }
+      const diff = birthday - now;
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      document.getElementById("countdown").innerText = days + " days until Baby’s birthday! 🎉";
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Love Popup
+    function showLove() { document.getElementById("popup").classList.add("show"); }
+    function hideLove() { document.getElementById("popup").classList.remove("show"); }
   </script>
 </body>
 </html>
